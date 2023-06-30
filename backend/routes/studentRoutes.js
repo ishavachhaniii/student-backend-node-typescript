@@ -72,16 +72,18 @@ const verifyToken = (req, res, next) => {
 router.post(
   "/student/add",
   authenticate,
-  // upload.single("profileImage"),
+  upload.single("profileImage"),
   async (req, res) => {
     try {
       const {
         firstName,
         lastName,
         standard,
+        divison,
         gender,
         email,
         mobileNumber,
+        address,
         profileImage,
       } = req.body;
 
@@ -106,9 +108,11 @@ router.post(
         firstName,
         lastName,
         standard,
+        divison,
         gender,
         email,
         mobileNumber,
+        address,
         profileImage,
       });
 
@@ -141,16 +145,18 @@ router.put(
   "/student/update/:id",
   authenticate,
   verifyToken,
-  // upload.single("profileImage"),
+  upload.single("profileImage"),
   async (req, res) => {
     try {
       const {
         firstName,
         lastName,
         standard,
+        divison,
         gender,
         email,
         mobileNumber,
+        address,
         profileImage
       } = req.body;
 
@@ -180,9 +186,11 @@ router.put(
       student.firstName = firstName;
       student.lastName = lastName;
       student.standard = standard;
+      student.divison = divison;
       student.gender = gender;
       student.email = email;
       student.mobileNumber = mobileNumber;
+      student.address = address;
       student.profileImage = profileImage;
 
       await student.save();

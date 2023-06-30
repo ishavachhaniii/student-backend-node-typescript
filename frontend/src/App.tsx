@@ -10,7 +10,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import StudentList from "./components/Home";
 import StudentUpdate from "./components/UpdateStudent";
-import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute component
+import ProtectedRoute from "./components/ProtectedRoute"; 
 import ViewStudent from "./components/ViewStudent";
 import Navbar from "./components/Navbar";
 

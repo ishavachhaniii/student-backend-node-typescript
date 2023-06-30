@@ -19,9 +19,11 @@ interface FormData {
   firstName: string;
   lastName: string;
   standard: string;
+  divison: string;
   gender: string;
   email: string;
   mobileNumber: string;
+  address: string;
   profileImage: string;
 }
 
@@ -30,9 +32,11 @@ const StudentForm = () => {
     firstName: "",
     lastName: "",
     standard: "",
+    divison: "",
     gender: "",
     email: "",
     mobileNumber: "",
+    address: "",
     profileImage: "",
   };
 
@@ -40,9 +44,11 @@ const StudentForm = () => {
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
     standard: Yup.string().required("Standard is required"),
+    divison: Yup.string().required("Divison is required"),
     gender: Yup.string().required("Gender is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
     mobileNumber: Yup.string().required("Mobile Number is required"),
+    address: Yup.string().required("Address is required"),
     profileImage: Yup.string(),
   });
 
@@ -106,7 +112,6 @@ const StudentForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, setFieldValue }) => (
           <Form>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -146,6 +151,18 @@ const StudentForm = () => {
                 <ErrorMessage name="standard" component="div" />
               </Grid>
               <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="text"
+                  id="divison"
+                  name="divison"
+                  label="Divison"
+                  variant="outlined"
+                  fullWidth
+                />
+                <ErrorMessage name="divison" component="div" />
+              </Grid>
+              <Grid item xs={12}>
                 <FormControl component="fieldset">
                   <FormLabel component="legend">Gender</FormLabel>
                   <Field name="gender">
@@ -163,6 +180,11 @@ const StudentForm = () => {
                           value="female"
                           control={<Radio />}
                           label="Female"
+                        />
+                        <FormControlLabel
+                          value="other"
+                          control={<Radio />}
+                          label="Other"
                         />
                       </RadioGroup>
                     )}
@@ -194,6 +216,18 @@ const StudentForm = () => {
                 />
                 <ErrorMessage name="mobileNumber" component="div" />
               </Grid>
+              <Grid item xs={12}>
+                <Field
+                  as={TextField}
+                  type="text"
+                  id="address"
+                  name="address"
+                  label="Address"
+                  variant="outlined"
+                  fullWidth
+                />
+                <ErrorMessage name="address" component="div" />
+              </Grid>
             </Grid>
             <Grid item xs={12} mt={3}>
               <input
@@ -209,7 +243,6 @@ const StudentForm = () => {
               </Button>
             </Grid>
           </Form>
-        )}
       </Formik>
     </Container>
   );

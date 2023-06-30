@@ -13,17 +13,17 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // birthdate: {
-  //   type: String, // Using the Date type for birthdate
-  //   required: true,
-  // },
   standard: {
     type: Number,
     required: true,
   },
+  divison: {
+    type: String,
+    required: true,
+  },
   gender: {
     type: String,
-    enum: ["female", "male"],
+    enum: ["female", "male", "other"],
   },
   email: {
     type: String,
@@ -31,6 +31,10 @@ const studentSchema = new mongoose.Schema({
   },
   mobileNumber: {
     type: Number,
+    required: true,
+  },
+  address: {
+    type: String,
     required: true,
   },
   profileImage: {

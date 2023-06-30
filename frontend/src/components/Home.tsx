@@ -20,12 +20,12 @@ interface Student {
   profileImage: string;
   firstName: string;
   lastName: string;
-  // birthdate : String;
   standard: String;
+  divison: String;
   gender: String;
   email: string;
-  password: String;
   mobileNumber: string;
+  address : string;
 }
 
 const StudentList = () => {
@@ -165,20 +165,23 @@ const StudentList = () => {
           </Button>
         </Grid>
       </Grid>
-      <TableContainer component={Container}>
+      <TableContainer 
+      // component={Container}
+      >
         <Table>
           <TableHead>
             <TableRow >
-            <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Sr No.</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Profile Image</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>First Name</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Last Name</TableCell>
-              {/* <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Birthdate</TableCell> */}
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Standard</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Gender</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Email</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Mobile Number</TableCell>
-              <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Action</TableCell>
+            <TableCell style={{fontWeight: "bold"}}>Sr No.</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Profile Image</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>First Name</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Last Name</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Standard</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Divison</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Gender</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Email</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Mobile Number</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Address</TableCell>
+              <TableCell style={{fontWeight: "bold"}}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -203,12 +206,12 @@ const StudentList = () => {
                   </TableCell>
                   <TableCell>{student.firstName}</TableCell>
                   <TableCell>{student.lastName}</TableCell>
-                  {/* <TableCell>{student.birthdate}</TableCell> */}
                   <TableCell>{student.standard}</TableCell>
+                  <TableCell>{student.divison}</TableCell>
                   <TableCell>{student.gender}</TableCell>
                   <TableCell>{student.email}</TableCell>
                   <TableCell>{student.mobileNumber}</TableCell>
-                  
+                  <TableCell>{student.address}</TableCell>
                   <TableCell>
                   <Button
                       onClick={() => handleUpdateStudent(student._id)}

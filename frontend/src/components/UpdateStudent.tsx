@@ -19,9 +19,11 @@ interface Student {
   firstName: string;
   lastName: string;
   standard: string;
+  divison: string;
   gender: string;
   email: string;
   mobileNumber: string;
+  address: string;
   profileImage: string;
 }
 
@@ -29,11 +31,13 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
   standard: Yup.string().required("Standard is required"),
+  divison: Yup.string().required("Divison is required"),
   gender: Yup.string().required("Gender is required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
   mobileNumber: Yup.string().required("Mobile Number is required"),
+  address: Yup.string().required("Address is required"),
   profilePicture: Yup.string(),
 });
 
@@ -100,10 +104,12 @@ const StudentUpdate = () => {
       firstName: "",
       lastName: "",
       standard: "",
+      divison: "",
       gender: "male",
       email: "",
       mobileNumber: "",
-      profileImage: "", 
+      address: "",
+      profileImage: "",
     },
     validationSchema: validationSchema,
     onSubmit: handleSubmit,
@@ -192,6 +198,18 @@ const StudentUpdate = () => {
             />
           </Grid>
           <Grid item xs={12}>
+            <TextField
+              label="Divison"
+              variant="outlined"
+              name="divison"
+              value={formik.values.divison}
+              onChange={formik.handleChange}
+              fullWidth
+              error={formik.touched.divison && Boolean(formik.errors.divison)}
+              helperText={formik.touched.divison && formik.errors.divison}
+            />
+          </Grid>
+          <Grid item xs={12}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Gender</FormLabel>
               <RadioGroup
@@ -212,6 +230,11 @@ const StudentUpdate = () => {
                   value="female"
                   control={<Radio />}
                   label="Female"
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Other"
                 />
               </RadioGroup>
               {formik.touched.gender && formik.errors.gender && (
@@ -246,6 +269,20 @@ const StudentUpdate = () => {
               helperText={
                 formik.touched.mobileNumber && formik.errors.mobileNumber
               }
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Address"
+              variant="outlined"
+              name="address"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              fullWidth
+              error={
+                formik.touched.address && Boolean(formik.errors.address)
+              }
+              helperText={formik.touched.address && formik.errors.address}
             />
           </Grid>
           <Grid item xs={12} mt={3}>
