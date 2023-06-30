@@ -24,7 +24,6 @@ const storage = multer.diskStorage({
 // Multer file upload configuration
 const upload = multer({
   storage: storage,
-  dest: "upload/images",
   limits: {
     fileSize: 5 * 1024 * 1024, // 5MB
   },
@@ -37,6 +36,7 @@ const upload = multer({
     }
   },
 });
+
 
 // Middleware function to verify token
 const verifyToken = (req, res, next) => {
@@ -72,13 +72,12 @@ const verifyToken = (req, res, next) => {
 router.post(
   "/student/add",
   authenticate,
-  upload.single("profileImage"),
+  // upload.single("profileImage"),
   async (req, res) => {
     try {
       const {
         firstName,
         lastName,
-        // birthdate,
         standard,
         gender,
         email,
@@ -102,16 +101,10 @@ router.post(
         throw new Error("Email already exists.");
       }
 
-      // let profileImage = "";
-      if (req.file) {
-        profileImage = req.file.path;
-      }
-
       // Create a new student
       const student = new Student({
         firstName,
         lastName,
-        // birthdate,
         standard,
         gender,
         email,
@@ -154,7 +147,6 @@ router.put(
       const {
         firstName,
         lastName,
-        // age,
         standard,
         gender,
         email,
@@ -187,16 +179,11 @@ router.put(
 
       student.firstName = firstName;
       student.lastName = lastName;
-      // student.age = age;
       student.standard = standard;
       student.gender = gender;
       student.email = email;
       student.mobileNumber = mobileNumber;
       student.profileImage = profileImage;
-
-      if (req.file) {
-        student.profileImage = req.file.path;
-      }
 
       await student.save();
 

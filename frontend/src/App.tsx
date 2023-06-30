@@ -12,10 +12,12 @@ import StudentList from "./components/Home";
 import StudentUpdate from "./components/UpdateStudent";
 import ProtectedRoute from "./components/ProtectedRoute"; // Import the ProtectedRoute component
 import ViewStudent from "./components/ViewStudent";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar />
     <Routes>
       <Route path="/school/signup" element={<SignUp />} />
       <Route path="/school/signin" element={<SignIn />} />

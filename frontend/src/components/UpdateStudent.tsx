@@ -22,6 +22,7 @@ interface Student {
   gender: string;
   email: string;
   mobileNumber: string;
+  profileImage: string;
 }
 
 const validationSchema = Yup.object({
@@ -33,25 +34,13 @@ const validationSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
   mobileNumber: Yup.string().required("Mobile Number is required"),
+  profilePicture: Yup.string(),
 });
 
 const StudentUpdate = () => {
   const { studentId } = useParams<{ studentId: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        formik.setFieldValue("profileImage", reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleSubmit = async (values: Student) => {
     try {
@@ -64,7 +53,10 @@ const StudentUpdate = () => {
             Authorization: token!,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            ...values,
+            profileImage: values.profileImage.split(",")[1], // Extract the base64 image data),
+          }),
         }
       );
 
@@ -89,6 +81,20 @@ const StudentUpdate = () => {
     }
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64Image = reader.result as string;
+        formik.setFieldValue("profileImage", base64Image);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -97,6 +103,7 @@ const StudentUpdate = () => {
       gender: "male",
       email: "",
       mobileNumber: "",
+      profileImage: "", 
     },
     validationSchema: validationSchema,
     onSubmit: handleSubmit,
@@ -242,13 +249,27 @@ const StudentUpdate = () => {
             />
           </Grid>
           <Grid item xs={12} mt={3}>
-              <input
-                type="file"
-                accept="image/*"
-                id="profileImage"
-                name="profileImage"
+            <input
+              type="file"
+              accept="image/*"
+              id="profileImage"
+              name="profileImage"
+              onChange={handleFileChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            {formik.values.profileImage && (
+              <img
+                src={formik.values.profileImage}
+                alt="Profile Image"
+                style={{
+                  width: "100px",
+                  maxHeight: "300px",
+                  objectFit: "cover",
+                }}
               />
-            </Grid>
+            )}
+          </Grid>
           <Grid item xs={12}>
             <Button variant="contained" color="primary" type="submit">
               Update

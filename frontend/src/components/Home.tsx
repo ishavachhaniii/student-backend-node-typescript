@@ -169,6 +169,7 @@ const StudentList = () => {
         <Table>
           <TableHead>
             <TableRow >
+            <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Sr No.</TableCell>
               <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Profile Image</TableCell>
               <TableCell style={{textAlign: "center", fontWeight: "bold"}}>First Name</TableCell>
               <TableCell style={{textAlign: "center", fontWeight: "bold"}}>Last Name</TableCell>
@@ -188,8 +189,9 @@ const StudentList = () => {
                 </TableCell>
               </TableRow>
             ) : (
-              filteredStudentList.map((student) => (
+              filteredStudentList.map((student, index) => (
                 <TableRow key={student._id}>
+                <TableCell>{index + 1}</TableCell>
                   <TableCell>
                     {student.profileImage && (
                       <img

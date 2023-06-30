@@ -14,12 +14,10 @@ import {
 } from "@mui/material";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { DatePicker } from "@mui/lab";
 
 interface FormData {
   firstName: string;
   lastName: string;
-  // birthdate: String; // Step 2: Add birthdate field
   standard: string;
   gender: string;
   email: string;
@@ -31,7 +29,6 @@ const StudentForm = () => {
   const initialValues: FormData = {
     firstName: "",
     lastName: "",
-    // birthdate: "",
     standard: "",
     gender: "",
     email: "",
@@ -42,7 +39,6 @@ const StudentForm = () => {
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
-    // birthdate: Yup.date().required("Birthdate is required"),
     standard: Yup.string().required("Standard is required"),
     gender: Yup.string().required("Gender is required"),
     email: Yup.string().email("Invalid email").required("Email is required"),
@@ -137,22 +133,6 @@ const StudentForm = () => {
                 />
                 <ErrorMessage name="lastName" component="div" />
               </Grid>
-              {/* <Grid item xs={12}>
-                <Field
-                  as={DatePicker}
-                  id="birthdate"
-                  name="birthdate"
-                  label="Birthdate"
-                  value={values.birthdate}
-                  onChange={(value: Date) => {
-                    setFieldValue("birthdate", value);
-                  }}
-                  renderInput={(params : any) => (
-                    <TextField {...params} variant="outlined" fullWidth />
-                  )}
-                />
-                <ErrorMessage name="birthdate" component="div" />
-              </Grid> */}
               <Grid item xs={12}>
                 <Field
                   as={TextField}
