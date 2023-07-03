@@ -8,6 +8,7 @@ import {
   TableRow,
   Button,
   Container,
+  Paper,
   Typography,
   Grid,
   TextField,
@@ -30,7 +31,7 @@ interface Student {
 
 const StudentList = () => {
   const [studentList, setStudentList] = useState<Student[]>([]);
-  const [filteredStudentList, setFilteredStudentList] = useState<Student[]>([]);
+  // const [filteredStudentList, setFilteredStudentList] = useState<Student[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -55,7 +56,7 @@ const StudentList = () => {
       .then((data) => {
         if (data.status) {
           setStudentList(data.data.students);
-          setFilteredStudentList(data.data.students);
+          // setFilteredStudentList(data.data.students);
           setTotalPages(data.data.totalPages); // Update the total number of pages
         } else {
           console.log(data.message);
@@ -94,7 +95,6 @@ const StudentList = () => {
             prevStudentList.filter((student) => student._id !== studentId)
           );
           console.log("Student deleted successfully");
-          fetchStudentList(); // Fetch the updated student list
         } else {
           console.log(data.message);
         }
@@ -115,7 +115,7 @@ const StudentList = () => {
         student.email.toLowerCase().includes(query)
     );
 
-    setFilteredStudentList(filteredStudents);
+    setStudentList(filteredStudents);
   };
 
   const handlePageChange = (
@@ -165,9 +165,7 @@ const StudentList = () => {
           </Button>
         </Grid>
       </Grid>
-      <TableContainer 
-      // component={Container}
-      >
+      <TableContainer component={Paper} style={{padding: 60}}>
         <Table>
           <TableHead>
             <TableRow >
@@ -185,14 +183,14 @@ const StudentList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredStudentList.length === 0 ? (
+            {studentList.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={9} align="center">
+                <TableCell colSpan={12} align="center" style={{fontWeight: "bold", fontSize: "20px"}}>
                   No students found
                 </TableCell>
               </TableRow>
             ) : (
-              filteredStudentList.map((student, index) => (
+              studentList.map((student, index) => (
                 <TableRow key={student._id}>
                 <TableCell>{index + 1}</TableCell>
                   <TableCell>

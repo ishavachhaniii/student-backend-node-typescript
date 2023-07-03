@@ -2,9 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./db');
 const bodyParser = require('body-parser');
-const routes = require('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 const image = require('./routes/userRoutes');
-const postRoutes = require('./routes/postRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const session = require("express-session");
 
@@ -33,12 +32,12 @@ app.use(
 app.use(bodyParser.json({ limit: "10mb" }));
 
 // Import and use the router that contains your routes
-app.use(routes);
-// app.use(image);
-app.use(postRoutes);
+
+app.use(userRoutes);
 app.use(studentRoutes);
 
 // Multer file upload destination
+// app.use(image);
 app.use('/profile', express.static('upload/images'));
 
 // Start the server
